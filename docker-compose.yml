@@ -9,8 +9,7 @@ services:
     depends_on:
       - database
   database:
-    platform: linux/x86_64
-    image: mysql
+    image: hypriot/rpi-mysql
     command: --default-authentication-plugin=mysql_native_password
     restart: always
     environment:
@@ -19,7 +18,10 @@ services:
     volumes:
       - mysql-db:/var/lib/mysql
       - ./:/var/lib/mysql
-
-
+    mqtt:
+      image: mjenz/rpi-mosquitto
+      environment:
+        - MYSQL_USER=iot_enst
+        - MYSQL_PASSWORD=cherfianadir
 volumes:
   mysql-db:
