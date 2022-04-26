@@ -7,7 +7,7 @@ const mqtt=require('mqtt');
 //const connectWithREtry = () =>{
 ///Create connection 
 const db=mysql.createConnection({
-    host:"localhost",
+    host:"dockerize_database_1",
     user:'root',
     password:'Cherfianadir2022@',
     database: 'test'
