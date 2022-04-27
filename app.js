@@ -11,7 +11,7 @@ const db=mysql.createConnection({
     host:"localhost",
     user:'root',
     password:'Cherfianadir2022@',
-    database: 'test'
+    database: 'iot_air_quality'
 });
 //connect
 db.connect((err)=>{
