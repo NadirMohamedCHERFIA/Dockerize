@@ -20,7 +20,8 @@ services:
     image: mjenz/rpi-mosquitto
   node-red:
     image: hypriot/rpi-node
-    depends_on: mqtt
+    depends_on: 
+      - mqtt
       
 volumes:
   mysql-db:

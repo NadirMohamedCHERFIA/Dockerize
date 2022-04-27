@@ -7,7 +7,7 @@ const mqtt=require('mqtt');
 //const connectWithREtry = () =>{
 ///Create connection 
 const db=mysql.createConnection({
-    host:"dockerize_database_1",
+    host:"localhost",
     user:'root',
     password:'Cherfianadir2022@',
     database: 'test'
@@ -32,8 +32,8 @@ client.on("connect",function(){
 client.on("error",function(error){
     console.log("Can't connect" + error);
     process.exit(1)});
-    var topic=["query"];
-    console.log("subscribing to topic");
+    var topic=["esp/jsonFormatedData"];
+    console.log("subscribing t/o topic");
     client.subscribe(topic,{qos:1});
     client.on('message',function(topic, message, packet){
         let sql ='INSERT INTO mqtt SET '+message;
@@ -60,15 +60,25 @@ app.get('/createdb',(req,res)=>{
         res.send('database created .....');
     });
 });
+//db creation 
+app.get('/createdb',(req,res)=>{
+    let sql = 'CREATE DATABASE iot_air_quality';
+    db.query(sql,(err,result)=>{
+        if(err) throw err;
+        console.log(result);
+        res.send('database created .....');
+    });
+});
 //create table
 app.get('/createtable',(req,res)=>{
-    let sql ='CREATE TABLE air_quality(id INT AUTO_INCREMENT PRIMARY KEY ,temperature VARCHAR(20),humidity VARCHAR(20),altitude VARCHAR(20),pressure VARCHAR(20),PM10 VARCHAR(20),PM25 VARCHAR(20),PM100 VARCHAR(20),P03um VARCHAR(20),P05um VARCHAR(20),P10um VARCHAR(20),P25um VARCHAR(20),P50um VARCHAR(20),P100um VARCHAR(20),CO2 VARCHAR(20),TVOC VARCHAR(20),AIR_QUALITY VARCHAR(20),GAS_RESISTANCE VARCHAR(20),TIME TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP)';
+    let sql ='CREATE TABLE air_quality(id INT AUTO_INCREMENT PRIMARY KEY ,temperature VARCHAR(20),humidity VARCHAR(20),altitude VARCHAR(20),p$
     db.query(sql,(err,result)=>{
         if(err) throw err;
         console.log(result);
         res.send("Tablecreated.....");
     });
 });
+
 //welcome route
 app.get('/',(req,res)=>{
     res.send('<h1>!WELCOME TO YOUR DOCKER!!</h1>')
@@ -90,3 +100,4 @@ const port=process.env.PORT || 3000;
 app.listen(port,()=>{
     console.log(`Server started on port :${port}`);
 })
+
