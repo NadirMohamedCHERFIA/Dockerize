@@ -5,7 +5,7 @@ const mqtt=require('mqtt');
 const { json } = require('express/lib/response');
 
 
-const connectWithREtry = () =>{
+//const connectWithREtry = () =>{
 ///Create connection 
 const db=mysql.createConnection({
     host:"localhost",
@@ -21,7 +21,7 @@ db.connect((err)=>{
     }
     console.log('mysql connected ....');
 });
-}
+//}
 options={
     username:"iot_enst",
     password:"cherfianadir",
