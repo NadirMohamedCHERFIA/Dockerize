@@ -59,7 +59,7 @@ client.on("error",function(error){
         });
     });
  
-connectWithREtry();
+//connectWithREtry();
 
 const app = express();
 app.use(cors({
