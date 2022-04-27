@@ -33,8 +33,8 @@ client.on("connect",function(){
 client.on("error",function(error){
     console.log("Can't connect" + error);
     process.exit(1)});
-    var topic1="esp/jsonFormatedData1";
-    var topic2="esp/jsonFormatedData2";
+    var topic1=["esp/jsonFormatedData1"];
+    var topic2=["esp/jsonFormatedData2"];
     console.log("subscribing t/o topic");
     client.subscribe(topic1,{qos:1});
     client.subscribe(topic2,{qos:1});
