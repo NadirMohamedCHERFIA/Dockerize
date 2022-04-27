@@ -38,7 +38,7 @@ client.on("error",function(error){
     client.subscribe(topic,{qos:1});
     client.on('message',function(topic, message, packet){
         const jsonFormatedData=JSON.parse(message);
-        var sql ='INSERT INTO air_quality SET temperature='+jsonFormatedDataObject.temperature+',humidity='+jsonFormatedData.humidity+',altitude='+jsonFormatedData.altitude+',pressure='+jsonFormatedData.pressure+',PM10='+jsonFormatedData.PM10+',PM25='+jsonFormatedData.PM25+',PM100='+jsonFormatedData.PM100+
+        var sql ='INSERT INTO air_quality SET temperature='+jsonFormatedData.temperature+',humidity='+jsonFormatedData.humidity+',altitude='+jsonFormatedData.altitude+',pressure='+jsonFormatedData.pressure+',PM10='+jsonFormatedData.PM10+',PM25='+jsonFormatedData.PM25+',PM100='+jsonFormatedData.PM100+
         ',P03um='+jsonFormatedData.P03um+',P05um='+jsonFormatedData.P05um+',P10um='+jsonFormatedData.P10um+',P25um='+jsonFormatedData.P25um+',P50um='+jsonFormatedData.P50um+',P100um='+jsonFormatedData.P100um;
         console.log(sql)
         console.log("message is "+ message);
