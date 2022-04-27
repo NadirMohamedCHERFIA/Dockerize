@@ -36,8 +36,9 @@ client.on("error",function(error){
     console.log("subscribing t/o topic");
     client.subscribe(topic,{qos:1});
     client.on('message',function(topic, message, packet){
-        console.log(message.humidity);
-        let sql ='INSERT INTO mqtt SET '+message;
+        const jsonDataObject=JSON.parse(message);
+        console.log(jsonDataObject.humidity);
+        let sql ='INSERT INTO mqtt SET '+jsonDataObject.humidity;
         console.log(sql)
         console.log("message is "+ message);
         console.log("topic is "+ topic);
