@@ -53,11 +53,12 @@ client.on("error",function(error){
         //console.log(sql)
         //console.log("message is "+ message);
         //console.log("topic is "+ topic);
+        db.query(sql,(err,result)=>{
+            if(err) throw err;
+            console.log(result);
+        });
     });
-    db.query(sql,(err,result)=>{
-        if(err) throw err;
-        console.log(result);
-    });
+ 
 connectWithREtry();
 
 const app = express();
