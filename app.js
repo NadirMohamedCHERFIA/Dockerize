@@ -50,7 +50,7 @@ client.on("error",function(error){
     client.on('message',function(topic2, message, packet){
         const jsonFormatedData2=JSON.parse(message);
         sql +=',CO2='+jsonFormatedData2.CO2+',TVOC='+jsonFormatedData2.TVOC+',AIR_QUALITY='+jsonFormatedData2.AIR_QUALITY+',GAS_RESISTANCE='+jsonFormatedData2.GAS_RESISTANCE;
-        //console.log(sql)
+        console.log(sql)
         console.log("message is "+ message);
         console.log("topic is "+ topic2);
         db.query(sql,(err,result)=>{
