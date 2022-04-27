@@ -36,6 +36,8 @@ client.on("error",function(error){
     console.log("subscribing t/o topic");
     client.subscribe(topic,{qos:1});
     client.on('message',function(topic, message, packet){
+        let dataObject=JSON.parse(message);
+        console.log(dataObject.humidity);
         let sql ='INSERT INTO mqtt SET '+message;
         console.log(sql)
         console.log("message is "+ message);
@@ -71,7 +73,7 @@ app.get('/createdb',(req,res)=>{
 });
 //create table
 app.get('/createtable',(req,res)=>{
-    let sql ='CREATE TABLE air_quality(id INT AUTO_INCREMENT PRIMARY KEY ,temperature VARCHAR(20),humidity VARCHAR(20),altitude VARCHAR(20),p$
+    let sql ='CREATE TABLE air_quality(id INT AUTO_INCREMENT PRIMARY KEY ,temperature VARCHAR(20),humidity VARCHAR(20),altitude VARCHAR(20),pressure VARCHAR(20),PM10 VARCHAR(20),PM25 VARCHAR(20),PM100 VARCHAR(20),P03um VARCHAR(20),P05um VARCHAR(20),P10um VARCHAR(20),P25um VARCHAR(20),P50um VARCHAR(20),P100um VARCHAR(20),CO2 VARCHAR(20),TVOC VARCHAR(20),AIR_QUALITY VARCHAR(20),GAS_RESISTANCE VARCHAR(20),TIME TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP)';
     db.query(sql,(err,result)=>{
         if(err) throw err;
         console.log(result);
