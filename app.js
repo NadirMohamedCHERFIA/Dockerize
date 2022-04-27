@@ -5,7 +5,7 @@ const mqtt=require('mqtt');
 const { json } = require('express/lib/response');
 
 
-//const connectWithREtry = () =>{
+const connectWithREtry = () =>{
 ///Create connection 
 const db=mysql.createConnection({
     host:"localhost",
@@ -21,7 +21,7 @@ db.connect((err)=>{
     }
     console.log('mysql connected ....');
 });
-//}
+}
 options={
     username:"iot_enst",
     password:"cherfianadir",
@@ -33,22 +33,32 @@ client.on("connect",function(){
 client.on("error",function(error){
     console.log("Can't connect" + error);
     process.exit(1)});
-    var topic=["esp/jsonFormatedData"];
+    var topic1="esp/jsonFormatedData1";
+    var topic2="esp/jsonFormatedData2";
     console.log("subscribing t/o topic");
-    client.subscribe(topic,{qos:1});
+    client.subscribe(topic1,{qos:1});
+    client.subscribe(topic2,{qos:1});
+    var sql="";
     client.on('message',function(topic, message, packet){
         const jsonFormatedData=JSON.parse(message);
-        var sql ='INSERT INTO air_quality SET temperature='+jsonFormatedData.temperature+',humidity='+jsonFormatedData.humidity+',altitude='+jsonFormatedData.altitude+',pressure='+jsonFormatedData.pressure+',PM10='+jsonFormatedData.PM10+',PM25='+jsonFormatedData.PM25+',PM100='+jsonFormatedData.PM100+
+        sql +='INSERT INTO air_quality SET'+'temperature='+jsonFormatedData.temperature+',humidity='+jsonFormatedData.humidity+',altitude='+jsonFormatedData.altitude+',pressure='+jsonFormatedData.pressure+',PM10='+jsonFormatedData.PM10+',PM25='+jsonFormatedData.PM25+',PM100='+jsonFormatedData.PM100+
         ',P03um='+jsonFormatedData.P03um+',P05um='+jsonFormatedData.P05um+',P10um='+jsonFormatedData.P10um+',P25um='+jsonFormatedData.P25um+',P50um='+jsonFormatedData.P50um+',P100um='+jsonFormatedData.P100um;
-        console.log(sql)
-        console.log("message is "+ message);
-        console.log("topic is "+ topic);
-        db.query(sql,(err,result)=>{
-            if(err) throw err;
-            console.log(result);
-        });
+        //console.log(sql)
+        //console.log("message is "+ message);
+        //console.log("topic is "+ topic);
     });
-//connectWithREtry();
+    client.on('message',function(topic, message, packet){
+        const jsonFormatedData=JSON.parse(message);
+        sql +=',CO2='+jsonFormatedData.CO2+',TVOC='+jsonFormatedData.TVOC+',AIR_QUALITY='+jsonFormatedData.AIR_QUALITY+',GAS_RESISTANCE='+jsonFormatedData.GAS_RESISTANCE;
+        //console.log(sql)
+        //console.log("message is "+ message);
+        //console.log("topic is "+ topic);
+    });
+    db.query(sql,(err,result)=>{
+        if(err) throw err;
+        console.log(result);
+    });
+connectWithREtry();
 
 const app = express();
 app.use(cors({
