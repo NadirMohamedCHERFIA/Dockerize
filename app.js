@@ -37,11 +37,11 @@ client.on("error",function(error){
     console.log("subscribing t/o topic");
     client.subscribe(topic1,{qos:1});
     client.subscribe(topic2,{qos:1});
-    client.on('message',function(topic1, message, packet){
-        const jsonFormatedData=JSON.parse(message);
-        var query1='INSERT INTO air_quality SET'+'temperature='+jsonFormatedData.temperature+',humidity='+jsonFormatedData.humidity+',altitude='+jsonFormatedData.altitude+',pressure='+jsonFormatedData.pressure+',PM10='+jsonFormatedData.PM10+',PM25='+jsonFormatedData.PM25+',PM100='+jsonFormatedData.PM100+
+    client.on('message',function(topic1, message1, packet){
+        const jsonFormatedData=JSON.parse(message1);
+        var query1='INSERT INTO air_quality SET '+'temperature='+jsonFormatedData.temperature+',humidity='+jsonFormatedData.humidity+',altitude='+jsonFormatedData.altitude+',pressure='+jsonFormatedData.pressure+',PM10='+jsonFormatedData.PM10+',PM25='+jsonFormatedData.PM25+',PM100='+jsonFormatedData.PM100+
         ',P03um='+jsonFormatedData.P03um+',P05um='+jsonFormatedData.P05um+',P10um='+jsonFormatedData.P10um+',P25um='+jsonFormatedData.P25um+',P50um='+jsonFormatedData.P50um+',P100um='+jsonFormatedData.P100um;
-        console.log("message is "+ message);
+        console.log("message is "+ message1);
         console.log("topic is "+ topic1);
         console.log(query1)
     });
