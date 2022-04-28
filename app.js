@@ -39,7 +39,6 @@ client.on("error",function(error){
         global.message1=message;
         console.log("message is "+ message1);
         console.log("topic is "+ topic1);
-        console.log("1:"+query1);
     });
     var client2 = mqtt.connect("mqtt://localhost",options)
     client2.on("connect",function(){	
