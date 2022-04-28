@@ -43,7 +43,7 @@ client.on("error",function(error){
         ',P03um='+jsonFormatedData.P03um+',P05um='+jsonFormatedData.P05um+',P10um='+jsonFormatedData.P10um+',P25um='+jsonFormatedData.P25um+',P50um='+jsonFormatedData.P50um+',P100um='+jsonFormatedData.P100um;
         console.log("message is "+ message);
         console.log("topic is "+ topic1);
-        console.log(sql2)
+        console.log(sql1)
     });
     client.on('message2',function(topic2, message2, packet){
         const jsonFormatedData2=JSON.parse(message2);
