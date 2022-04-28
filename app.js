@@ -37,9 +37,6 @@ client.on("error",function(error){
     client.subscribe(topic1,{qos:1});
     client.on('message',function(topic1, message, packet){
         global.message1=message;
-        global.jsonFormatedData=JSON.parse(message);
-        var query1='INSERT INTO air_quality SET '+'temperature='+jsonFormatedData.temperature+',humidity='+jsonFormatedData.humidity+',altitude='+jsonFormatedData.altitude+',pressure='+jsonFormatedData.pressure+',PM10='+jsonFormatedData.PM10+',PM25='+jsonFormatedData.PM25+',PM100='+jsonFormatedData.PM100+
-        ',P03um='+jsonFormatedData.P03um+',P05um='+jsonFormatedData.P05um+',P10um='+jsonFormatedData.P10um+',P25um='+jsonFormatedData.P25um+',P50um='+jsonFormatedData.P50um+',P100um='+jsonFormatedData.P100um;
         console.log("message is "+ message1);
         console.log("topic is "+ topic1);
         console.log("1:"+query1);
@@ -55,15 +52,18 @@ client.on("error",function(error){
         console.log("subscribing t/o topic");
         client2.subscribe(topic2,{qos:1});
         client2.on('message',function(topic2, message, packet){
-            const jsonFormatedData2=JSON.parse(message);
-            var sql=",CO2="+jsonFormatedData2.CO2+",TVOC="+jsonFormatedData2.TVOC+",AIR_QUALITY="+jsonFormatedData2.AIR_QUALITY+",GAS_RESISTANCE="+jsonFormatedData2.GAS_RESISTANCE;
+        const jsonFormatedData2=JSON.parse(message);
+        global.jsonFormatedData=JSON.parse(message1);
+        var query1='INSERT INTO air_quality SET '+'temperature='+jsonFormatedData.temperature+',humidity='+jsonFormatedData.humidity+',altitude='+jsonFormatedData.altitude+',pressure='+jsonFormatedData.pressure+',PM10='+jsonFormatedData.PM10+',PM25='+jsonFormatedData.PM25+',PM100='+jsonFormatedData.PM100+
+        ',P03um='+jsonFormatedData.P03um+',P05um='+jsonFormatedData.P05um+',P10um='+jsonFormatedData.P10um+',P25um='+jsonFormatedData.P25um+',P50um='+jsonFormatedData.P50um+',P100um='+jsonFormatedData.P100um+
+        ",CO2="+jsonFormatedData2.CO2+",TVOC="+jsonFormatedData2.TVOC+",AIR_QUALITY="+jsonFormatedData2.AIR_QUALITY+",GAS_RESISTANCE="+jsonFormatedData2.GAS_RESISTANCE;
             console.log("message is "+ message);
             console.log("topic is "+ topic2);
-            console.log(jsonFormatedData);
-            // db.query(query1,(err,result)=>{
-            //     if(err) throw err;
-            //     console.log(result);
-            // });
+            console.log(query1);
+            db.query(query1,(err,result)=>{
+                if(err) throw err;
+                console.log(result);
+            });
         });
     
         
