@@ -44,6 +44,7 @@ client.on("error",function(error){
         console.log("message is "+ message);
         console.log("topic is "+ topic1);
         console.log(sql1)
+        Delay(500);
     });
     client.on('message2',function(topic2, message2, packet){
         const jsonFormatedData2=JSON.parse(message2);
