@@ -29,6 +29,7 @@ services:
     restart: always
   node-red:
     image: nodered/node-red
+    restart: always
     network_mode: host
     volumes:
       - node_red_data:/data
