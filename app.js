@@ -44,7 +44,7 @@ client.on("error",function(error){
         ',P03um='+jsonFormatedData.P03um+',P05um='+jsonFormatedData.P05um+',P10um='+jsonFormatedData.P10um+',P25um='+jsonFormatedData.P25um+',P50um='+jsonFormatedData.P50um+',P100um='+jsonFormatedData.P100um;
         console.log("message is "+ message1);
         console.log("topic is "+ topic1);
-        console.log(query1);
+        console.log("1:"+query1);
     });
     var client2 = mqtt.connect("mqtt://localhost",options)
     client2.on("connect",function(){	
@@ -63,11 +63,10 @@ client.on("error",function(error){
             console.log("message is "+ message);
             console.log("topic is "+ topic2);
             console.log(sql);
-            console.log(query1+message1)
-            db.query(query1,(err,result)=>{
-                if(err) throw err;
-                console.log(result);
-            });
+            // db.query(query1,(err,result)=>{
+            //     if(err) throw err;
+            //     console.log(result);
+            // });
         });
     
         
