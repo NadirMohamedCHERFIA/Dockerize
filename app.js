@@ -4,7 +4,7 @@ const cors=require('cors');
 const mqtt=require('mqtt');
 const { json } = require('express/lib/response');
 
-
+var sql;
 //const connectWithREtry = () =>{
 ///Create connection 
 const db=mysql.createConnection({
@@ -38,7 +38,6 @@ client.on("error",function(error){
     console.log("subscribing t/o topic");
     client.subscribe(topic1,{qos:1});
     client.subscribe(topic2,{qos:1});
-    var sql="";
     client.on('message',function(topic1, message, packet){
         const jsonFormatedData=JSON.parse(message);
         let sql1='INSERT INTO air_quality SET'+'temperature='+jsonFormatedData.temperature+',humidity='+jsonFormatedData.humidity+',altitude='+jsonFormatedData.altitude+',pressure='+jsonFormatedData.pressure+',PM10='+jsonFormatedData.PM10+',PM25='+jsonFormatedData.PM25+',PM100='+jsonFormatedData.PM100+
