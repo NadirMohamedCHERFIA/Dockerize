@@ -51,6 +51,7 @@ client.on("error",function(error){
         //console.log("message is "+ message2);
         //console.log("topic is "+ topic2);
         console.log(query2)
+        console.log(HELLO)
         db.query(query2,(err,result)=>{
             if(err) throw err;
             console.log(result);
