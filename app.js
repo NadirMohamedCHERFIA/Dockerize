@@ -45,14 +45,12 @@ client.on("error",function(error){
         //console.log("topic is "+ topic1);
         console.log(query1)
     });
-    client.on('message2',function(topic2, message2, packet,sql){
+    client.on('message2',function(topic2, message2, packet,query1){
         const jsonFormatedData2=JSON.parse(message2);
         var sql=",CO2="+jsonFormatedData2.CO2+",TVOC="+jsonFormatedData2.TVOC+",AIR_QUALITY="+jsonFormatedData2.AIR_QUALITY+",GAS_RESISTANCE="+jsonFormatedData2.GAS_RESISTANCE;
         //console.log("message is "+ message2);
         //console.log("topic is "+ topic2);
-        console.log(sql)
-        console.log(HELLO)
-        db.query(query2,(err,result)=>{
+        db.query(query1,(err,result)=>{
             if(err) throw err;
             console.log(result);
         });
