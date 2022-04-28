@@ -45,10 +45,6 @@ client.on("error",function(error){
         console.log("message is "+ message1);
         console.log("topic is "+ topic1);
         console.log(query1);
-        db.query("INSERT INTO",(err,result)=>{
-            if(err) throw err;
-            console.log(result);
-        });
     });
     var client2 = mqtt.connect("mqtt://localhost",options)
     client2.on("connect",function(){	
@@ -67,7 +63,7 @@ client.on("error",function(error){
             console.log("message is "+ message);
             console.log("topic is "+ topic2);
             console.log(sql);
-            console.log("test:"+message1)
+            console.log(query1+message1)
             db.query(query1,(err,result)=>{
                 if(err) throw err;
                 console.log(result);
