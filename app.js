@@ -32,8 +32,8 @@ client.on("connect",function(){
 client.on("error",function(error){
     console.log("Can't connect" + error);
     process.exit(1)});
-    var topic1=["esp/jsonFormatedData1"];
-    var topic2=["esp/jsonFormatedData2"];
+    var topic1="esp/jsonFormatedData1";
+    var topic2="esp/jsonFormatedData2";
     console.log("subscribing t/o topic");
     client.subscribe(topic1,{qos:1});
     client.subscribe(topic2,{qos:1});
@@ -50,7 +50,7 @@ client.on("error",function(error){
         var query2=',CO2='+jsonFormatedData2.CO2+',TVOC='+jsonFormatedData2.TVOC+',AIR_QUALITY='+jsonFormatedData2.AIR_QUALITY+',GAS_RESISTANCE='+jsonFormatedData2.GAS_RESISTANCE;
         console.log("message is "+ message2);
         console.log("topic is "+ topic2);
-        console.log(query2)
+        console.log("2:"+query2)
         db.query(query2,(err,result)=>{
             if(err) throw err;
             console.log(result);
