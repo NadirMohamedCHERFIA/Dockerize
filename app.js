@@ -94,7 +94,7 @@ app.get('/createdb',(req,res)=>{
 });
 //create table
 app.get('/createtable',(req,res)=>{
-    let sql ='CREATE TABLE air_quality(id INT AUTO_INCREMENT PRIMARY KEY ,TEMPERATURE_C VARCHAR(20),HUMIDITY_percerntage VARCHAR(20),ALTITUDE_m VARCHAR(20),PRESSURE_hPa VARCHAR(20),PM10 VARCHAR(20),PM25 VARCHAR(20),PM100 VARCHAR(20),P03um_perdecilitre VARCHAR(20),P05um_perdecilitre VARCHAR(20),P10um_perdecilitre VARCHAR(20),P25um_perdecilitre VARCHAR(20),P50um_perdecilitre VARCHAR(20),P100um_perdecilitre VARCHAR(20),CO2_ppm VARCHAR(20),TVOC_ppb VARCHAR(20),AIR_QUALITY_ppm VARCHAR(20),GAS_RESISTANCE_KOhms VARCHAR(20),TIME TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP)';
+    let sql ='CREATE TABLE air_quality(id INT AUTO_INCREMENT PRIMARY KEY ,TEMPERATURE_C VARCHAR(20),HUMIDITY_percentage VARCHAR(20),ALTITUDE_m VARCHAR(20),PRESSURE_hPa VARCHAR(20),PM10 VARCHAR(20),PM25 VARCHAR(20),PM100 VARCHAR(20),P03um_perdecilitre VARCHAR(20),P05um_perdecilitre VARCHAR(20),P10um_perdecilitre VARCHAR(20),P25um_perdecilitre VARCHAR(20),P50um_perdecilitre VARCHAR(20),P100um_perdecilitre VARCHAR(20),CO2_ppm VARCHAR(20),TVOC_ppb VARCHAR(20),AIR_QUALITY_ppm VARCHAR(20),GAS_RESISTANCE_KOhms VARCHAR(20),TIME TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP)';
     db.query(sql,(err,result)=>{
         if(err) throw err;
         console.log(result);
