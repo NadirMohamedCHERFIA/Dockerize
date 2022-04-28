@@ -45,7 +45,7 @@ client.on("error",function(error){
         console.log("message is "+ message1);
         console.log("topic is "+ topic1);
         console.log(query1);
-        db.query(query1,(err,result)=>{
+        db.query("INSERT INTO",(err,result)=>{
             if(err) throw err;
             console.log(result);
         });
