@@ -53,6 +53,7 @@ client.on("error",function(error){
             if(err) throw err;
             console.log(result);
         });
+        console.log("1:"+jsonFormatedData)
     });
  
 //connectWithREtry();
