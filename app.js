@@ -56,8 +56,8 @@ client.on("error",function(error){
         var topic1="esp/jsonFormatedData1";
         var topic2="esp/jsonFormatedData2";
         console.log("subscribing t/o topic");
-        client.subscribe(topic2,{qos:1});
-        client.on('message',function(topic2, message, packet){
+        client2.subscribe(topic2,{qos:1});
+        client2.on('message',function(topic2, message, packet){
             const jsonFormatedData2=JSON.parse(message);
             var sql=",CO2="+jsonFormatedData2.CO2+",TVOC="+jsonFormatedData2.TVOC+",AIR_QUALITY="+jsonFormatedData2.AIR_QUALITY+",GAS_RESISTANCE="+jsonFormatedData2.GAS_RESISTANCE;
             console.log("message is "+ message);
