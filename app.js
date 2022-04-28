@@ -53,9 +53,9 @@ client.on("error",function(error){
         client2.on('message',function(topic2, message, packet){
         const jsonFormatedData2=JSON.parse(message);
         global.jsonFormatedData=JSON.parse(message1);
-        var query1='INSERT INTO air_quality SET '+'temperature='+jsonFormatedData.temperature+',humidity='+jsonFormatedData.humidity+',altitude='+jsonFormatedData.altitude+',pressure='+jsonFormatedData.pressure+',PM10='+jsonFormatedData.PM10+',PM25='+jsonFormatedData.PM25+',PM100='+jsonFormatedData.PM100+
-        ',P03um='+jsonFormatedData.P03um+',P05um='+jsonFormatedData.P05um+',P10um='+jsonFormatedData.P10um+',P25um='+jsonFormatedData.P25um+',P50um='+jsonFormatedData.P50um+',P100um='+jsonFormatedData.P100um+
-        ",CO2="+jsonFormatedData2.CO2+",TVOC="+jsonFormatedData2.TVOC+",AIR_QUALITY="+jsonFormatedData2.AIR_QUALITY+",GAS_RESISTANCE="+jsonFormatedData2.GAS_RESISTANCE;
+        var query1='INSERT INTO air_quality SET '+'TEMPERATURE_C='+jsonFormatedData.temperature+',HUMIDITY_percentage='+jsonFormatedData.humidity+',ALTITUDE_m='+jsonFormatedData.altitude+',PRESSURE_hPa='+jsonFormatedData.pressure+',PM10='+jsonFormatedData.PM10+',PM25='+jsonFormatedData.PM25+',PM100='+jsonFormatedData.PM100+
+        ',P03um_perdecilitre='+jsonFormatedData.P03um+',P05um_perdecilitre='+jsonFormatedData.P05um+',P10um_perdecilitre='+jsonFormatedData.P10um+',P25um_perdecilitre='+jsonFormatedData.P25um+',P50um_perdecilitre='+jsonFormatedData.P50um+',P100um_perdecilitre='+jsonFormatedData.P100um+
+        ",CO2_ppm="+jsonFormatedData2.CO2+",TVOC_ppb="+jsonFormatedData2.TVOC+",AIR_QUALITY_ppm="+jsonFormatedData2.AIR_QUALITY+",GAS_RESISTANCE_KOhms="+jsonFormatedData2.GAS_RESISTANCE;
             console.log("message is "+ message);
             console.log("topic is "+ topic2);
             console.log(query1);
@@ -94,7 +94,7 @@ app.get('/createdb',(req,res)=>{
 });
 //create table
 app.get('/createtable',(req,res)=>{
-    let sql ='CREATE TABLE air_quality(id INT AUTO_INCREMENT PRIMARY KEY ,temperature VARCHAR(20),humidity VARCHAR(20),altitude VARCHAR(20),pressure VARCHAR(20),PM10 VARCHAR(20),PM25 VARCHAR(20),PM100 VARCHAR(20),P03um VARCHAR(20),P05um VARCHAR(20),P10um VARCHAR(20),P25um VARCHAR(20),P50um VARCHAR(20),P100um VARCHAR(20),CO2 VARCHAR(20),TVOC VARCHAR(20),AIR_QUALITY VARCHAR(20),GAS_RESISTANCE VARCHAR(20),TIME TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP)';
+    let sql ='CREATE TABLE air_quality(id INT AUTO_INCREMENT PRIMARY KEY ,TEMPERATURE_C VARCHAR(20),HUMIDITY_percerntage VARCHAR(20),ALTITUDE_m VARCHAR(20),PRESSURE_hPa VARCHAR(20),PM10 VARCHAR(20),PM25 VARCHAR(20),PM100 VARCHAR(20),P03um_perdecilitre VARCHAR(20),P05um_perdecilitre VARCHAR(20),P10um_perdecilitre VARCHAR(20),P25um_perdecilitre VARCHAR(20),P50um_perdecilitre VARCHAR(20),P100um_perdecilitre VARCHAR(20),CO2_ppm VARCHAR(20),TVOC_ppb VARCHAR(20),AIR_QUALITY_ppm VARCHAR(20),GAS_RESISTANCE_KOhms VARCHAR(20),TIME TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP)';
     db.query(sql,(err,result)=>{
         if(err) throw err;
         console.log(result);
