@@ -43,6 +43,7 @@ client.on("error",function(error){
         ',P03um='+jsonFormatedData.P03um+',P05um='+jsonFormatedData.P05um+',P10um='+jsonFormatedData.P10um+',P25um='+jsonFormatedData.P25um+',P50um='+jsonFormatedData.P50um+',P100um='+jsonFormatedData.P100um;
         console.log("message is "+ message1);
         console.log("topic is "+ topic1);
+        console.log(query1);
     });
     client.on('message2',function(topic2, message2, packet,query1){
         globale.jsonFormatedData2=JSON.parse(message2);
@@ -53,7 +54,7 @@ client.on("error",function(error){
             if(err) throw err;
             console.log(result);
         });
-        console.log("1:"+jsonFormatedData)
+        console.log("FIRST:"+jsonFormatedData)
     });
  
 //connectWithREtry();
