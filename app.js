@@ -47,9 +47,9 @@ client.on("error",function(error){
     });
     client.on('message2',function(topic2, message2, packet){
         const jsonFormatedData2=JSON.parse(message2);
-        var query2=',CO2='+jsonFormatedData2.CO2+',TVOC='+jsonFormatedData2.TVOC+',AIR_QUALITY='+jsonFormatedData2.AIR_QUALITY+',GAS_RESISTANCE='+jsonFormatedData2.GAS_RESISTANCE;
-        console.log("message is "+ message2);
-        console.log("topic is "+ topic2);
+        var query2=",CO2="+jsonFormatedData2.CO2+",TVOC="+jsonFormatedData2.TVOC+",AIR_QUALITY="+jsonFormatedData2.AIR_QUALITY+",GAS_RESISTANCE="+jsonFormatedData2.GAS_RESISTANCE;
+        //console.log("message is "+ message2);
+        //console.log("topic is "+ topic2);
         console.log("2:"+query2)
         db.query(query2,(err,result)=>{
             if(err) throw err;
