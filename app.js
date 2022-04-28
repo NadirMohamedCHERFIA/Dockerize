@@ -27,7 +27,7 @@ options={
     clean:true}
 var client = mqtt.connect("mqtt://localhost",options)
 client.on("connect",function(){	
-    console.log("mosquitto connected");
+    console.log("client1:mosquitto connected");
 })
 client.on("error",function(error){
     console.log("Can't connect" + error);
@@ -37,27 +37,46 @@ client.on("error",function(error){
     console.log("subscribing t/o topic");
     client.subscribe(topic1,{qos:1});
     client.subscribe(topic2,{qos:1});
-    client.on('message',function(topic1, message1, packet){
-        global.message1=message1;
-        global.jsonFormatedData=JSON.parse(message1);
+    client.on('message',function(topic1, message, packet){
+        global.message1=message;
+        global.jsonFormatedData=JSON.parse(message);
         var query1='INSERT INTO air_quality SET '+'temperature='+jsonFormatedData.temperature+',humidity='+jsonFormatedData.humidity+',altitude='+jsonFormatedData.altitude+',pressure='+jsonFormatedData.pressure+',PM10='+jsonFormatedData.PM10+',PM25='+jsonFormatedData.PM25+',PM100='+jsonFormatedData.PM100+
         ',P03um='+jsonFormatedData.P03um+',P05um='+jsonFormatedData.P05um+',P10um='+jsonFormatedData.P10um+',P25um='+jsonFormatedData.P25um+',P50um='+jsonFormatedData.P50um+',P100um='+jsonFormatedData.P100um;
+        var sql=",CO2="+jsonFormatedData2.CO2+",TVOC="+jsonFormatedData2.TVOC+",AIR_QUALITY="+jsonFormatedData2.AIR_QUALITY+",GAS_RESISTANCE="+jsonFormatedData2.GAS_RESISTANCE;
         console.log("message is "+ message1);
         console.log("topic is "+ topic1);
         console.log(query1);
-    });
-    client.on('message2',function(topic2, message2, packet,query1){
-        globale.jsonFormatedData2=JSON.parse(message2);
-        var sql=",CO2="+jsonFormatedData2.CO2+",TVOC="+jsonFormatedData2.TVOC+",AIR_QUALITY="+jsonFormatedData2.AIR_QUALITY+",GAS_RESISTANCE="+jsonFormatedData2.GAS_RESISTANCE;
-        console.log("message is "+ message2);
-        console.log("topic is "+ topic2);
-        console.log("FIRST:"+message1)
         db.query(query1,(err,result)=>{
             if(err) throw err;
             console.log(result);
         });
-        
     });
+    var client2 = mqtt.connect("mqtt://localhost",options)
+    client2.on("connect",function(){	
+        console.log("client2:mosquitto connected");
+    })
+    client2.on("error",function(error){
+        console.log("Can't connect" + error);
+        process.exit(1)});
+        var topic1="esp/jsonFormatedData1";
+        var topic2="esp/jsonFormatedData2";
+        console.log("subscribing t/o topic");
+        client.subscribe(topic2,{qos:1});
+        client.on('message',function(topic2, message, packet){
+            global.jsonFormatedData=JSON.parse(message);
+            var sql=",CO2="+jsonFormatedData2.CO2+",TVOC="+jsonFormatedData2.TVOC+",AIR_QUALITY="+jsonFormatedData2.AIR_QUALITY+",GAS_RESISTANCE="+jsonFormatedData2.GAS_RESISTANCE;
+            console.log("message is "+ message);
+            console.log("topic is "+ topic2);
+            console.log(sql);
+            console.log("test:"+message1)
+            db.query(query1,(err,result)=>{
+                if(err) throw err;
+                console.log(result);
+            });
+        });
+    
+        
+        
  
 //connectWithREtry();
 
