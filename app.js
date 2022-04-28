@@ -50,11 +50,12 @@ client.on("error",function(error){
         var sql=",CO2="+jsonFormatedData2.CO2+",TVOC="+jsonFormatedData2.TVOC+",AIR_QUALITY="+jsonFormatedData2.AIR_QUALITY+",GAS_RESISTANCE="+jsonFormatedData2.GAS_RESISTANCE;
         console.log("message is "+ message2);
         console.log("topic is "+ topic2);
+        console.log("FIRST:"+jsonFormatedData)
         db.query(query1,(err,result)=>{
             if(err) throw err;
             console.log(result);
         });
-        console.log("FIRST:"+jsonFormatedData)
+        
     });
  
 //connectWithREtry();
