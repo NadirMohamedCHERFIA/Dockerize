@@ -36,7 +36,7 @@ client.on("error",function(error){
     console.log("subscribing t/o topic");
     client.subscribe(topic1,{qos:1});
     client.on('message',function(topic1, message, packet){
-        //message1=message;
+        message1=message;
         console.log("message is "+ message);
         console.log("topic is "+ topic1);
     });
