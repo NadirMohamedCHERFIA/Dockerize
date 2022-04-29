@@ -45,7 +45,7 @@ client.on("error",function(error){
         console.log("client2:mosquitto connected");
     })
     client2.on("error",function(error){
-        console.log("Can't connect" + error);
+        console.log("Can't connect!" + error);
         process.exit(1)});
         var topic2="esp32/BV1.1/jsonFormatedData2";
         console.log("subscribing t/o topic");
