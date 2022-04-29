@@ -3,7 +3,7 @@ const mysql=require('mysql');
 const cors=require('cors');
 const mqtt=require('mqtt');
 const { json } = require('express/lib/response');
-var message1=""
+
 //const connectWithREtry = () =>{
 ///Create connection 
 const db=mysql.createConnection({
@@ -36,7 +36,7 @@ client.on("error",function(error){
     console.log("subscribing t/o topic");
     client.subscribe(topic1,{qos:1});
     client.on('message',function(topic1, message, packet){
-        message1=message;
+        global.message1=message;
         console.log("message is "+ message1);
         console.log("topic is "+ topic1);
     });
@@ -45,7 +45,7 @@ client.on("error",function(error){
         console.log("client2:mosquitto connected");
     })
     client2.on("error",function(error){
-        console.log("Can't connect!" + error);
+        console.log("Can't connect" + error);
         process.exit(1)});
         var topic2="esp32/BV1.1/jsonFormatedData2";
         console.log("subscribing t/o topic");
