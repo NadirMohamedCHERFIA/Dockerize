@@ -3,7 +3,7 @@ const mysql=require('mysql');
 const cors=require('cors');
 const mqtt=require('mqtt');
 const { json } = require('express/lib/response');
-
+var message1=""
 //const connectWithREtry = () =>{
 ///Create connection 
 const db=mysql.createConnection({
@@ -36,7 +36,7 @@ client.on("error",function(error){
     console.log("subscribing t/o topic");
     client.subscribe(topic1,{qos:1});
     client.on('message',function(topic1, message, packet){
-        global.message1=message;
+        message1=message;
         console.log("message is "+ message1);
         console.log("topic is "+ topic1);
     });
