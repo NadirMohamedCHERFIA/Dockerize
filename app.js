@@ -5,6 +5,7 @@ const mqtt=require('mqtt');
 const { json } = require('express/lib/response');
 //const connectWithREtry = () =>{
 ///Create connection 
+let message1;
 const db=mysql.createConnection({
     host:"localhost",
     user:'root',
@@ -35,7 +36,7 @@ client.on("error",function(error){
     console.log("subscribing t/o topic");
     client.subscribe(topic1,{qos:1});
     client.on('message',function(topic1, message, packet){
-        globalThis.message1=message;
+        message1=message;
         console.log("message is "+ message1);
         console.log("topic is "+ topic1);
     });
